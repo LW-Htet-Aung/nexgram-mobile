@@ -1,11 +1,12 @@
-import useAuthUser from "@/hooks/useAuthUser";
+import { useAuth } from "@/providers/auth-provider";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { Redirect, Stack } from "expo-router";
-import React from "react";
 
 const AuthRoutesLayout = () => {
-  const { data, } = useAuthUser();
-  console.log(data, "data");
-  if (data?.isLoggedIn) return <Redirect href="/" />;
+  const { isAuthenticated } = useAuthStore();
+
+  if (isAuthenticated()) return <Redirect href="/(tabs)" />;
+
   return <Stack />;
 };
 

@@ -47,7 +47,13 @@
           "iosUrlScheme": "com.googleusercontent.apps.1013038778615-lch3dmd44qlc9vvmtno39uln81t8qg1q"
         }
       ],
-      "expo-secure-store"
+      [
+        "expo-secure-store",
+        {
+          "configureAndroidBackup": true,
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

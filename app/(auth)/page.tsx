@@ -12,24 +12,22 @@ import useSocialAuth from "@/hooks/useSocialAuth";
 import {
   GoogleSignin,
   GoogleSigninButton,
+  isSuccessResponse,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
-
-GoogleSignin.configure({
-  webClientId: process.env.GOOGLE_CLIENT_ID,
-});
+import useGoogleOauth from "@/hooks/useGoogleOauth";
+import { useAuth } from "@/providers/auth-provider";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const AuthPage = () => {
   const isLoading = false;
-  const { mutateAsync, isPending, error } = useSocialAuth();
+  // const { mutateAsync, isPending, error } = useSocialAuth();
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const res = await GoogleSignin.signIn();
-    } catch (e) {}
-  };
-  console.log(error, "ERROR");
+  const { handleGoogleSignIn } = useGoogleOauth();
+
+  const { user } = useAuthStore();
+  console.log(user, "ERROR");
+
   return (
     <View className="flex-1 bg-white">
       <View className="justify-between flex-1 px-8">
@@ -45,8 +43,8 @@ const AuthPage = () => {
           <View className="flex-col gap-2">
             <TouchableOpacity
               className="flex-row items-center justify-center px-6 py-3 bg-white border border-gray-300 rounded-full"
-              onPress={() => mutateAsync()}
-              disabled={isPending}
+              onPress={handleGoogleSignIn}
+              // disabled={isPending}
               style={{
                 shadowColor: "#000",
                 shadowOffset: { width: 0, height: 1 },
