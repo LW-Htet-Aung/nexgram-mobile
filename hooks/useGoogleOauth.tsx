@@ -5,23 +5,12 @@ import {
   isSuccessResponse,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { Alert } from "react-native";
-import * as SecureStore from "expo-secure-store";
-import { AUTH_TOKEN } from "@/constants";
-import { useAuth } from "@/providers/auth-provider";
 import { useAuthStore } from "@/stores/useAuthStore";
 
-// GoogleSignin.configure({
-//   webClientId: process.env.GOOGLE_CLIENT_ID,
-//   offlineAccess: true,
-// });
-// GoogleSignin.configure({
-//   webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
-//   offlineAccess: true,
-// });
 const useGoogleOauth = () => {
-  const { login, logout, isAuthenticated, user } = useAuthStore();
+  const { login, logout, isAuthenticated, user, loading } = useAuthStore();
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -67,19 +56,16 @@ const useGoogleOauth = () => {
       const hasPreviousSession = await GoogleSignin.getCurrentUser();
 
       if (!isAuthenticated && user && hasPreviousSession) {
-        console.log("signing out");
         await GoogleSignin.signOut();
       }
 
       const res = await GoogleSignin.signIn();
-      console.log("Google SignIn result:", res);
 
       if (isSuccessResponse(res)) {
         const { data } = await api.post("/google/mobile", {
           code: res.data.serverAuthCode,
         });
 
-        console.log("Backend auth response:", data);
         // await SecureStore.setItemAsync(AUTH_TOKEN, data.token);
         await login(data.token, data.user); // ✅ no state loop here
       }
@@ -102,17 +88,23 @@ const useGoogleOauth = () => {
     }
   }, [login, isAuthenticated, user]);
 
-  const handleGoogleSignOut = useCallback(async () => {
+  const handleSignOut = useCallback(async () => {
     try {
-      // await GoogleSignin.revokeAccess();
-      // await GoogleSignin.signOut();
+      const currentUser = await GoogleSignin.getCurrentUser();
+
+      if (currentUser) {
+        console.log(currentUser, "user");
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+      }
+
       await logout();
     } catch (error) {
       Alert.alert("Failed to sign out");
     }
   }, [logout]);
 
-  return { handleGoogleSignIn, handleGoogleSignOut };
+  return { handleGoogleSignIn, handleSignOut };
 };
 
 export default useGoogleOauth;

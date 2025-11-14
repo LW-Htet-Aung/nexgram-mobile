@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Image,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -18,18 +19,26 @@ import {
 import useGoogleOauth from "@/hooks/useGoogleOauth";
 import { useAuth } from "@/providers/auth-provider";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { SafeAreaView } from "react-native-safe-area-context";
+import EmailLogin from "@/components/auth/email";
 
 const AuthPage = () => {
   const isLoading = false;
   // const { mutateAsync, isPending, error } = useSocialAuth();
 
   const { handleGoogleSignIn } = useGoogleOauth();
+  const { user, loading } = useAuthStore();
 
-  const { user } = useAuthStore();
-  console.log(user, "ERROR");
+  // console.log(loading, "Loading");
+  // if (loading)
+  //   return (
+  //     <View className="flex-1 h-full bg-black">
+  //       <Text>Loading...</Text>
+  //     </View>
+  //   );
 
   return (
-    <View className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-gray">
       <View className="justify-between flex-1 px-8">
         <View className="justify-center flex-1">
           {/* Demo image */}
@@ -40,9 +49,10 @@ const AuthPage = () => {
               resizeMode="contain"
             />
           </View>
-          <View className="flex-col gap-2">
+          <EmailLogin />
+          <View className="flex-col gap-2 mt-4">
             <TouchableOpacity
-              className="flex-row items-center justify-center px-6 py-3 bg-white border border-gray-300 rounded-full"
+              className="flex-row items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-lg"
               onPress={handleGoogleSignIn}
               // disabled={isPending}
               style={{
@@ -79,7 +89,7 @@ const AuthPage = () => {
           </Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

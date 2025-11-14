@@ -20,7 +20,7 @@ interface AuthStoreProp {
 export const useAuthStore = create<AuthStoreProp>((set, get) => ({
   user: null,
   token: null,
-  loading: false,
+  loading: true,
   initializeAuth: async () => {
     set({ loading: true });
     try {
@@ -48,11 +48,11 @@ export const useAuthStore = create<AuthStoreProp>((set, get) => ({
   logout: async () => {
     set({ loading: true });
     try {
-      await new Promise((res) => setTimeout(res, 1000)); // simulate 1s delay
+      // await new Promise((res) => setTimeout(res, 1000)); // simulate 1s delay
 
-      // await removeFromSecureStorage(AUTH_TOKEN);
-      // await removeFromSecureStorage(USER_DATA);
-      // set({ user: null, token: null });
+      await removeFromSecureStorage(AUTH_TOKEN);
+      await removeFromSecureStorage(USER_DATA);
+      set({ user: null, token: null });
     } catch (error) {
       console.log("logout error", error);
     } finally {

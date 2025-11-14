@@ -7,7 +7,13 @@ const AuthRoutesLayout = () => {
 
   if (isAuthenticated()) return <Redirect href="/(tabs)" />;
 
-  return <Stack />;
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+      }}
+    />
+  );
 };
 
 export default AuthRoutesLayout;
