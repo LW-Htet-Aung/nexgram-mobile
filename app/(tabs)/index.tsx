@@ -4,16 +4,24 @@ import React from "react";
 import { Text, View } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import Button from "@/components/ui/button";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 type Props = {};
 
-const HomePage = (props: Props) => {
+const HomeScreen = (props: Props) => {
   const { user, loading } = useAuthStore();
-  const { handleGoogleSignOut } = useGoogleOauth();
+  const { handleSignOut } = useGoogleOauth();
 
   return (
-    <View>
+    <SafeAreaView className="flex-1">
       <Text>Index</Text>
-      <Button className="flex-row" onPress={handleGoogleSignOut}>
+
+      <Button
+        loading={loading}
+        icon={<MaterialCommunityIcons name="logout" />}
+        className="flex-row"
+        onPress={handleSignOut}
+      >
         {loading ? (
           <>
             <Feather className="animate-spin" size={16} name="loader" />
@@ -23,8 +31,8 @@ const HomePage = (props: Props) => {
           <Text className="text-white">Logout</Text>
         )}
       </Button>
-    </View>
+    </SafeAreaView>
   );
 };
 
-export default HomePage;
+export default HomeScreen;

@@ -1,6 +1,11 @@
 import { tailwindMerge } from "@/libs/utils";
 import React, { ReactNode } from "react";
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 const buttonVariants = cva(
   "flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium  transition-colors  disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -32,13 +37,18 @@ const buttonVariants = cva(
 );
 interface ButtonProps
   extends TouchableOpacityProps,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof buttonVariants> {
+  icon?: ReactNode;
+  loading?: boolean;
+}
 
 const Button = ({
   variant,
   size,
   children,
   className,
+  icon,
+  loading = false,
   ...props
 }: ButtonProps) => {
   return (
@@ -46,7 +56,18 @@ const Button = ({
       className={tailwindMerge(buttonVariants({ variant, size }), className)}
       {...props}
     >
-      {children}
+      {loading ? (
+        <ActivityIndicator color="white" size="small" />
+      ) : (
+        <>
+          {icon && icon}
+          {typeof children === "string" ? (
+            <Text className="text-sm font-medium">{children}</Text>
+          ) : (
+            children
+          )}
+        </>
+      )}
     </TouchableOpacity>
   );
 };
