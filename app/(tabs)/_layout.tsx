@@ -32,11 +32,15 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons name="home" size={30} color={color} />
+            <MaterialCommunityIcons
+              name="home-outline"
+              size={30}
+              color={color}
+            />
           ),
         }}
       />
-            <Tabs.Screen
+      <Tabs.Screen
         name="search"
         options={{
           title: "",
@@ -50,7 +54,11 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" size={30} color={color} />
+            <MaterialCommunityIcons
+              name="bell-outline"
+              size={30}
+              color={color}
+            />
           ),
         }}
       />
@@ -59,7 +67,11 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="email" size={30} color={color} />
+            <MaterialCommunityIcons
+              name="email-outline"
+              size={30}
+              color={color}
+            />
           ),
         }}
       />
@@ -68,11 +80,10 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" size={30} color={color} />
+            <MaterialCommunityIcons name="account-outline" size={30} color={color} />
           ),
         }}
       />
-
     </Tabs>
   );
 };
