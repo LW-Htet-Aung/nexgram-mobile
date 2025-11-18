@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { tailwindMerge } from "@/libs/utils";
 interface SignOutButtonProps extends TouchableOpacityProps {
   loading: boolean;
@@ -29,14 +29,14 @@ const SignOutButton = ({
           <Text>Loading</Text>
         </>
       )}
-      <MaterialCommunityIcons
-        name="logout"
+      <Feather
+        name="log-out"
         size={24}
         color={"#E024SE"}
         className={tailwindMerge("", iconClassName)}
       >
         {title}
-      </MaterialCommunityIcons>
+      </Feather>
     </TouchableOpacity>
   );
 };
