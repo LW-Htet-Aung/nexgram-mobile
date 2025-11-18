@@ -2,10 +2,9 @@ import useGoogleOauth from "@/hooks/useGoogleOauth";
 import { useAuthStore } from "@/stores/useAuthStore";
 import React from "react";
 import { Text, View } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
 import Button from "@/components/ui/button";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 type Props = {};
 
 const HomeScreen = (props: Props) => {
@@ -18,7 +17,7 @@ const HomeScreen = (props: Props) => {
 
       <Button
         loading={loading}
-        icon={<MaterialCommunityIcons name="logout" />}
+        icon={<Feather name="log-out" />}
         className="flex-row"
         onPress={handleSignOut}
       >

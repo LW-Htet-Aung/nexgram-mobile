@@ -2,7 +2,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { Redirect, Tabs } from "expo-router";
 import React from "react";
 import { Text } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 type Props = {};
 
@@ -32,11 +32,7 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
-              name="home-outline"
-              size={30}
-              color={color}
-            />
+            <Feather name="home" size={24} color={color} />
           ),
         }}
       />
@@ -45,7 +41,7 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="magnify" size={30} color={color} />
+            <Feather name="search" size={24} color={color} />
           ),
         }}
       />
@@ -54,11 +50,7 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="bell-outline"
-              size={30}
-              color={color}
-            />
+            <Feather name="bell" size={24} color={color} />
           ),
         }}
       />
@@ -67,11 +59,7 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="email-outline"
-              size={30}
-              color={color}
-            />
+            <Feather name="mail" size={24} color={color} />
           ),
         }}
       />
@@ -80,7 +68,7 @@ const TabsLayout = (props: Props) => {
         options={{
           title: "",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-outline" size={30} color={color} />
+            <Feather name="user" size={24} color={color} />
           ),
         }}
       />

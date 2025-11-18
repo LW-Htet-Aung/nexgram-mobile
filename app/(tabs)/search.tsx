@@ -8,7 +8,8 @@ import {
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import SearchBar from "@/components/search-bar";
 
 type Props = {};
 const TrendingTopics = [
@@ -58,14 +59,15 @@ const SearchScreen = (props: Props) => {
     <SafeAreaView className="flex-1 bg-white">
       {/* header */}
       <View className="px-4 py-3 border-b border-gray-100">
-        <View className="flex-row items-center px-4 py-1 bg-gray-100 rounded-full">
-          <MaterialCommunityIcons size={20} name="magnify" color="#657786" />
+        {/* <View className="flex-row items-center px-4 py-1 bg-gray-100 rounded-full">
+          <Feather size={16} name="search" color="#657786" />
           <TextInput
             placeholder="Search"
             className="flex-1 ml-3 text-base"
             placeholderTextColor="#657786"
           />
-        </View>
+        </View> */}
+        <SearchBar />
       </View>
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <View className="p-4">
